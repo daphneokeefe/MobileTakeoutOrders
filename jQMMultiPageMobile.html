@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>MultiPage Mobile App</title>
+    <meta charset="utf-8" >
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" href="css/themes/ForestWheat.css" />
+    <link rel="stylesheet" href="css/themes/jquery.mobile.icons.min.css" />
+    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.0/jquery.mobile.structure-1.4.0.min.css" /> 
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <script src="http://code.jquery.com/mobile/1.4.0/jquery.mobile-1.4.0.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/mustache.js/0.7.2/mustache.min.js"></script>
+    <script src="scripts/data.js"></script>
+    <script src="scripts/menu.js"></script>
+    <script src="scripts/order.js"></script>    
+    <style>
+        body, input {
+            font-family: 'Open Sans', sans-serif;
+        }
+        .footer {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <!-- Home Page -->
+    <div data-role="page" id="HomePage">
+        <div data-role="header">
+            <h1>Home</h1>
+            <div data-role="navbar" data-iconpos="left">
+                <ul >
+                    <li><a href="https://www.google.com/maps/@37.7879331,-122.4074981,17z" 
+                            data-icon="location">Map</a></li>
+                    <li><a href="#MenuPage" data-icon="bars" data-transition="slide">Menu</a></li>
+                    <li><a href="tel:+18005551212" 
+                            data-inline="true" 
+                            data-icon="phone">Call Us</a></li>
+                </ul>
+            </div>
+        </div><!-- /header -->
+        <div role="main" class="ui-content">
+            <img src="images/Burger-Fries-e1336408952444.jpg" width="366px" height="227px" alt="burger & fries">
+            <p>Choose from our mouth-watering <a href='#MenuPage' data-transition="slide">menu</a>.</p>
+            <p>Then call us, and your order will be ready when you arrive.</p>
+        </div><!-- /content -->
+        <div data-role="footer" class="footer">
+            <a href=#AboutPage
+                data-icon="info"
+                data-transition="slide">About</a>
+            <a href="https://touch.facebook.com" data-icon="heart" >Like</a>
+        </div><!-- /footer -->
+    </div><!-- end of Home -->
+    <!-- About Page -->
+    <div data-role="page" id="AboutPage">
+        <div data-role="header" data-position="fixed">
+            <h1>About</h1>
+            <a data-rel="back"
+                data-role="button"
+                data-transition="slide"
+                data-direction="reverse"
+                data-icon="back"
+                data-iconpos="notext">Back</a>     
+            <div data-role="navbar" data-iconpos="left">
+                <ul >
+                    <li><a href="https://www.google.com/maps/@37.7879331,-122.4074981,17z" 
+                            data-icon="location">Map</a></li>
+                    <li><a href="#MenuPage" data-icon="bars" data-transition="slide">Menu</a></li>
+                    <li><a href="tel:+18005551212" 
+                            data-inline="true" 
+                            data-icon="phone">Call Us</a></li>
+                </ul>
+            </div>                
+        </div> <!-- header -->  
+        <div role="main" class="ui-content">
+            <p>This is a prototype web app for placing takeout restaurant orders.</p>
+            <p>It is mobile first -- optimized for mobile devices with jQuery Mobile.</p>
+            <p>We are using a custom jQuery Mobile theme, jQuery and Mustache.js, along with the Open Sans font from Google.</p>            
+            <p>To limit the scope of this demo app, the data is mocked using JavaScript object notation instead of a database. And, CDN versions of libraries are used where possible. </p>
+        </div><!-- /content -->
+        <div data-role="footer" class="footer">            
+        </div><!-- /footer -->
+    </div><!-- end of About -->
+    <!-- Menu Page -->
+    <div data-role="page" id="MenuPage">
+        <div data-role="header" data-position="fixed">
+            <h1>Menu</h1>
+            <a href="#HomePage"
+                data-role="button"
+                data-transition="slide"
+                data-direction="reverse"
+                data-icon="home"
+                data-iconpos="notext">Back</a>     
+             <a href="tel:+18005551212" 
+                data-role="button" 
+                data-inline="true" 
+                data-iconpos="notext"
+                data-icon="phone">Call Us</a>
+            <div data-role=navbar data-iconpos="right">
+                <ul>
+                    <li> <a id="orderCountButton" href='#OrderPage' data-icon="arrow-r" >No items ordered yet</a></li>
+                </ul>
+            </div>                    
+        </div><!-- /header -->
+        <div role="main" class="ui-content" style="clear:both;" >
+            <div data-role="collapsible" data-collapsed="true">  
+                <h3>Burgers</h3>
+                <ul id="burgersPlaceholder" data-role='listview' data-inset='true'></ul>
+            </div>
+            <div data-role="collapsible">
+                <h3>Sides</h3>
+                <ul id="sidesPlaceholder" data-role='listview' data-inset='true'></ul>
+            </div>
+            <script>
+                makeMenu("Burgers", data.burgers, '#burgersPlaceholder');
+                makeMenu("Sides", data.sides, "#sidesPlaceholder");
+            </script>
+        </div><!-- /content -->
+        <div data-role="footer" class="footer">
+          <div data-role="navbar" data-iconpos="left">
+                <ul >
+                    <li><a href="https://www.google.com/maps/@37.7879331,-122.4074981,17z" data-icon="location">Map</a></li>                  
+                    <li><a href="tel:+18005551212" 
+                            data-inline="true" 
+                            data-icon="phone">Call Us</a></li>
+                </ul>
+            </div>
+        </div><!-- /footer -->
+    </div><!-- end of Menu Page -->
+    <!-- Order Page -->
+    <div data-role="page" id="OrderPage">
+        <div data-role="header" data-position="fixed">
+            <h1>Order</h1>
+            <a data-rel="back"
+                data-role="button"
+                data-transition="slide"
+                data-direction="reverse"
+                data-icon="back"
+                data-iconpos="notext">Back</a>  
+             <a href="tel:+18005551212" 
+                data-role="button" 
+                data-inline="true" 
+                data-iconpos="notext"
+                data-icon="phone">Call Us</a>      
+        </div> <!-- header -->  
+        <div role="main" class="ui-content">
+            <ul id="orderList" data-role='listview' class="ui-listview" data-inset='true'></ul>
+            <script>
+                // Display the items on the order along with their quantities.                
+                $(document).on('pageshow', function(event) {
+                    $('#orderList').html(showOrder());
+                });
+            </script>
+            Your name:&nbsp;<input type="text">
+            Phone number:&nbsp;<input type="text">
+            <a href="#ThankYouPage" data-role="button">Place Order </a>
+        </div><!-- /content -->
+        <div data-role="footer" class="footer">
+          <div data-role="navbar" data-iconpos="left">
+                <ul >
+                    <li><a href="https://www.google.com/maps/@37.7879331,-122.4074981,17z" data-icon="location">Map</a></li>
+                    <li><a href="#HomePage" data-icon="bars" data-transition="slide">Home</a></li>
+                    <li><a href="tel:+18005551212" 
+                            data-inline="true" 
+                            data-icon="phone">Call Us</a></li>
+                </ul>
+            </div>
+        </div><!-- /footer -->
+    </div><!-- end of Order -->
+    <!-- Thank You Page -->
+    <div data-role="page" id="ThankYouPage">
+        <div data-role="header" data-position="fixed">
+            <h1>Thank You!</h1>
+            <a href="#HomePage"
+                data-role="button"
+                data-transition="slide"
+                data-direction="reverse"
+                data-icon="home"
+                data-iconpos="notext">Home</a>            
+        </div> <!-- header -->  
+        <div role="main" class="ui-content">
+            <p>Your order has been received. </p>
+        </div><!-- /content -->
+        <div data-role="footer" class="footer">  
+            <div data-role="navbar" data-iconpos="left">
+                <ul >
+                    <li><a href="https://www.google.com/maps/@37.7879331,-122.4074981,17z" 
+                            data-icon="location">Map</a></li>
+                    <li><a href="#MenuPage" data-icon="bars" data-transition="slide">Menu</a></li>
+                    <li><a href="tel:+18005551212" 
+                            data-inline="true" 
+                            data-icon="phone">Call Us</a></li>
+                </ul>
+            </div>                     
+        </div><!-- /footer -->
+    </div><!-- end of Thank You page -->    
+</body>
+</html>
